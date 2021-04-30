@@ -59,6 +59,16 @@ const getState = ({ getStore, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
+			},
+			borrarUnContacto: async id => {
+				try {
+					const respuesta = await fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+						method: "DELETE"
+					});
+					const data = await respuesta.json();
+				} catch (error) {
+					console.log(error);
+				}
 			}
 
 			//(Arrow) Functions that update the Store

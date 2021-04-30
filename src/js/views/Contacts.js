@@ -9,8 +9,13 @@ export const Contacts = () => {
 	const [state, setState] = useState({
 		showModal: false
 	});
-
+	const [indexBorrar, setIndexBorrar] = useState(null);
 	const { actions, store } = useContext(Context);
+
+	const borrar = id => {
+		setState({ showModal: true });
+		setIndexBorrar(id);
+	};
 
 	return (
 		<div className="container">
@@ -24,18 +29,12 @@ export const Contacts = () => {
 					<ul className="list-group pull-down" id="contact-list">
 						{store.agenda &&
 							store.agenda.map((persona, index) => {
-								return (
-									<ContactCard
-										key={index}
-										onDelete={() => setState({ showModal: true })}
-										persona={persona}
-									/>
-								);
+								return <ContactCard key={index} onDelete={e => borrar(index)} persona={persona} />;
 							})}
 					</ul>
 				</div>
 			</div>
-			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} />
+			<Modal show={state.showModal} onClose={() => setState({ showModal: false })} id={indexBorrar} />
 		</div>
 	);
 };
