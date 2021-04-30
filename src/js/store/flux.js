@@ -41,6 +41,24 @@ const getState = ({ getStore, setStore }) => {
 					}
 				};
 				conseguirAgenda();
+			},
+			createContact: async (name, email, phone, address) => {
+				try {
+					const respuesta = await fetch("https://assets.breatheco.de/apis/fake/contact/", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							full_name: name,
+							email: email,
+							agenda_slug: "aserdnad",
+							address: address,
+							phone: phone
+						})
+					});
+					const data = await respuesta.json();
+				} catch (error) {
+					console.log(error);
+				}
 			}
 
 			//(Arrow) Functions that update the Store
