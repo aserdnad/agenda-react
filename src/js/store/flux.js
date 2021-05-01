@@ -69,12 +69,41 @@ const getState = ({ getStore, setStore }) => {
 				} catch (error) {
 					console.log(error);
 				}
+			},
+			conseguirContactoEspecifico: async id => {
+				try {
+					const respuesta = await fetch("https://assets.breatheco.de/apis/fake/contact/" + id);
+					const data = await respuesta.json();
+					setStore({ contactoEditar: data });
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			updateContact: async (name, email, phone, address, id) => {
+				try {
+					const respuesta = await fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							full_name: name,
+							email: email,
+							agenda_slug: "aserdnad",
+							address: address,
+							phone: phone
+						})
+					});
+					const data = await respuesta.json();
+				} catch (error) {
+					console.log(error);
+				}
+			},
+			limpiarEspecifico: () => {
+				setStore({ contactoEditar: "" });
 			}
-
-			//(Arrow) Functions that update the Store
-			// Remember to use the scope: scope.state.store & scope.setState()
 		}
 	};
+	//(Arrow) Functions that update the Store
+	// Remember to use the scope: scope.state.store & scope.setState()
 };
 
 export default getState;

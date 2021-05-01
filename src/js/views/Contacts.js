@@ -29,7 +29,14 @@ export const Contacts = () => {
 					<ul className="list-group pull-down" id="contact-list">
 						{store.agenda &&
 							store.agenda.map((persona, index) => {
-								return <ContactCard key={index} onDelete={e => borrar(index)} persona={persona} />;
+								return (
+									<ContactCard
+										key={index}
+										onDelete={e => borrar(index)}
+										persona={persona}
+										editar={index}
+									/>
+								);
 							})}
 					</ul>
 				</div>
